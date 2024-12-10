@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
   const [advice, setAdvice] = useState()
@@ -8,6 +8,8 @@ function App() {
     const data = await res.json()
     setAdvice(data.slip.advice)
   }
+
+  useEffect(() => { getAdvice() }, [])
 
   return (
     <>
