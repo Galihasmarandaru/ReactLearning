@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface MessageProps {
   count: number;
 }
 
 function App() {
-  const [advice, setAdvice] = useState()
-  const [count, setCount] = useState(0)
+  const [advice, setAdvice] = useState<string>()
+  const [count, setCount] = useState<number>(0)
+  const hasFetchAdvice = useRef<boolean>(false)
 
   async function getAdvice() {
     const res = await fetch(import.meta.env.VITE_API_URL_ADVICE)
@@ -15,7 +16,12 @@ function App() {
     setCount((c) => c + 1)
   }
 
-  useEffect(() => { getAdvice() }, [])
+  useEffect(() => {
+    if (!hasFetchAdvice.current) {
+      getAdvice()
+      hasFetchAdvice.current = true
+    }
+  }, [])
 
   return (
     <>
