@@ -4,7 +4,7 @@ interface MessageProps {
   count: number;
 }
 
-function App() {
+function Advice() {
   const [advice, setAdvice] = useState<string>()
   const [count, setCount] = useState<number>(0)
   const hasFetchAdvice = useRef<boolean>(false)
@@ -40,4 +40,4 @@ function Message(props: MessageProps) {
   )
 }
 
-export default App
+export default Advice
